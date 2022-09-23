@@ -1,0 +1,19 @@
+#calculator {
+    display: grid;
+    width: 600px;
+    height: 800px;
+    margin: auto;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+    grid-auto-rows: minmax(1px, auto);
+}
+
+#calculator div {
+    background: peachpuff;
+    text-align: center;
+
+}
+
+body {
+    font-size: 40px;
+}

@@ -8,3 +8,41 @@ const add = (x, y) => x + y;
 const subtract = (x, y) => x - y;
 const multiply = (x, y) => x * y;
 const divide = (x, y) => x / y;
+
+// track current output window content in variable
+let output = '';
+const nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '/', '*', '+', '-', '.'];
+
+// link display to a JS variable
+const display = document.querySelector('#display');
+
+// push button text content to output when clicked
+const grid = document.querySelector('#calculator');
+grid.addEventListener('click', e => {
+    // if click is on number, add to display
+    if (nums.includes(e.target.textContent)) {
+        // display.textContent += e.target.textContent;
+        output += e.target.textContent;
+        display.textContent = output;
+    }
+
+    // if DEL is clicked, delete last character in display
+    if (e.target.textContent === 'DEL') {
+        output = output.slice(0, output.length - 1);
+        display.textContent = output;
+    }
+
+    // if AC is clicked, delete everything in display
+    if (e.target.textContent === 'AC') {
+        output = '';
+        display.textContent = output;
+    }
+
+    // if = is clicked, replace display contents with operation output
+    if (e.target.textContent === '=') {
+        display.textContent = output.split('');
+    }
+});
+
+// display.textContent += '2'
+    // if equals is clicked, perform and display calculation
