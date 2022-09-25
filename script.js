@@ -11,7 +11,7 @@ const divide = (x, y) => x / y;
 
 // track current output window content in variable
 let output = '';
-const nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '/', '*', '+', '-', '.'];
+const nums = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '/', '*', '+', '-', '.'];
 
 // link display to a JS variable
 const display = document.querySelector('#display');
@@ -40,9 +40,9 @@ grid.addEventListener('click', e => {
 
     // if = is clicked, replace display contents with operation output
     if (e.target.textContent === '=') {
-        display.textContent = output.split('');
+        if (output.includes('+')) {
+            const splitted = output.split('+');
+            display.textContent = Number(splitted[0]) + Number(splitted[1]);
+        }
     }
 });
-
-// display.textContent += '2'
-    // if equals is clicked, perform and display calculation
