@@ -10,8 +10,10 @@ const multiply = (x, y) => x * y;
 const divide = (x, y) => x / y;
 
 // track current output window content in variable
-let output = '';
-const nums = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '/', '*', '+', '-', '.'];
+let output;
+let current = '';
+let onOp = false;
+const nums = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
 // link display to a JS variable
 const display = document.querySelector('#display');
@@ -19,30 +21,55 @@ const display = document.querySelector('#display');
 // push button text content to output when clicked
 const grid = document.querySelector('#calculator');
 grid.addEventListener('click', e => {
-    // if click is on number, add to display
-    if (nums.includes(e.target.textContent)) {
-        // display.textContent += e.target.textContent;
-        output += e.target.textContent;
-        display.textContent = output;
+    // output.push(e.target.textContent);
+    // display.textContent = output[output.length - 1];
+    
+    // if adding more digits to a current number:
+    if (nums.includes(e.target.textContent) && !onOp) {
+        current += e.target.textContent;
+        display.textContent = current;
     }
 
-    // if DEL is clicked, delete last character in display
-    if (e.target.textContent === 'DEL') {
-        output = output.slice(0, output.length - 1);
-        display.textContent = output;
+    // if typing number after operation button is clicked:
+    if (nums.includes(e.target.textContent) && onOp) {
+        current = '';
+        onOp = false;
+        current += e.target.textContent;
+        display.textContent = current;
     }
 
     // if AC is clicked, delete everything in display
     if (e.target.textContent === 'AC') {
-        output = '';
-        display.textContent = output;
+        current = '';
+        output = 0;
+        display.textContent = '';
     }
 
-    // if = is clicked, replace display contents with operation output
-    if (e.target.textContent === '=') {
-        if (output.includes('+')) {
-            const splitted = output.split('+');
-            display.textContent = Number(splitted[0]) + Number(splitted[1]);
-        }
+    // if + is clicked, add plus sign to output string
+    if (e.target.textContent === '+') {
+        // if (output.includes('+')) {
+        //     const splitted = output.split('+');
+        //     display.textContent = Number(splitted[0]) + Number(splitted[1]);
+        // }
+        // output += '+';
+        // const splitted = output.split('+');
+        // display.textContent = splitted[0];
+        output = Number(current);
+        onOp = true;
     }
+
+    // if = is clicked:
+    if (e.target.textContent === '=') {
+        display.textContent = output + Number(current);
+        output = output + Number(current);
+        current = output;
+    }
+
+    console.log(output);
+
+    // if DEL is clicked, delete last character in display
+    // if (e.target.textContent === 'DEL') {
+    //     output = output.slice(0, output.length - 1);
+    //     display.textContent = output;
+    // }
 });
