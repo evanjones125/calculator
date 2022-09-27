@@ -12,16 +12,12 @@ const subtract = (x, y) => x - y;
 const multiply = (x, y) => x * y;
 const divide = (x, y) => x / y;
 
-// track current output window content in variable
-// let output;
-// let current = '';
-// let onOp = false;
-
 // create variables to store values inputted by user before and after operation button
 let currentOp, output;
 let a = '', b = '';
 
-const nums = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+// store all possible numbers and all possible operations in variables
+const nums = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'];
 const operations = ['+', '-', '*', '/'];
 
 // link display to a JS variable
